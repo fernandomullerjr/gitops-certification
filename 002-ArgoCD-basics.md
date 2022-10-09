@@ -403,3 +403,93 @@ argocd app list
 Finish
 
 Click Check to finish this challenge when ready.
+
+root@kubernetes-vm:~/workdir# argocd login localhost:30443 --insecure
+Username: admin
+Password: 
+'admin:login' logged in successfully
+Context 'localhost:30443' updated
+root@kubernetes-vm:~/workdir# argocd version
+argocd: v2.1.5+a8a6fc8
+  BuildDate: 2021-10-20T15:16:40Z
+  GitCommit: a8a6fc8dda0e26bb1e0b893e270c1128038f5b0f
+  GitTreeState: clean
+  GoVersion: go1.16.5
+  Compiler: gc
+  Platform: linux/amd64
+argocd-server: v2.1.5+a8a6fc8
+  BuildDate: 2021-10-20T15:16:40Z
+  GitCommit: a8a6fc8dda0e26bb1e0b893e270c1128038f5b0f
+  GitTreeState: clean
+  GoVersion: go1.16.5
+  Compiler: gc
+  Platform: linux/amd64
+  Ksonnet Version: v0.13.1
+  Kustomize Version: v4.2.0 2021-06-30T22:49:26Z
+  Helm Version: v3.6.0+g7f2df64
+  Kubectl Version: v0.21.0
+  Jsonnet Version: v0.17.0
+root@kubernetes-vm:~/workdir# argocd app list
+NAME  CLUSTER  NAMESPACE  PROJECT  STATUS  HEALTH  SYNCPOLICY  CONDITIONS  REPO  PATH  TARGET
+root@kubernetes-vm:~/workdir# 
+
+
+
+
+
+
+
+# Creating an application
+
+An application can be created in Argo CD from the UI, CLI, or by writing a Kubernetes manifest that can then be passed to kubectl to create resources.
+Creating an ArgoCD application in the UI
+
+First, navigate to the +NEW APP on the left-hand side of the UI. 
+
+Next, add the following to create the application:
+
+General Section:
+
+    Application Name: TBD
+    Project: default
+    Sync Policy: Automatic
+
+
+Source Section:
+
+    Repository URL/Git: this is the GitHub repository URL
+    Branches: main
+    Path: TBD
+
+
+Destination Section:
+
+    Cluster URL: select the cluster URL you are using
+    Namespace: default
+
+
+Then, click CREATE and you have now created your Argo CD application.
+
+Creating an Argo CD application with the argocd CLI
+
+argocd app create {APP NAME} \
+--project {PROJECT} \
+--repo {GIT REPO} \--path {APP FOLDER} \
+--dest-namespace {NAMESPACE} \
+--dest-server {SERVER URL}
+
+    {APP NAME} is the name you want to give the application
+    {PROJECT} is the name of the project created or "default"
+    {GIT REPO} is the url of the git repository where the gitops config is located
+    {APP FOLDER} is the path to the configuration for the application in the gitops repo
+    {DEST NAMESPACE} is the target namespace in the cluster where the application will be deployed
+    {SERVER URL} is the url of the cluster where the application will be deployed. Use https://kubernetes.default.svc to reference the same cluster where Argo CD has been deployed
+
+
+Once this completes, you can see the status and configuration of the application.
+
+argocd app list
+
+For a more detailed view of the application configuration, run:
+
+argocd app get {APP NAME}
