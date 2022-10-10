@@ -193,3 +193,145 @@ NAME                READY   UP-TO-DATE   AVAILABLE   AGE
 simple-deployment   1/1     1            1           40s
 root@kubernetes-vm:~/workdir# 
 ~~~~
+
+
+
+- You can manage your Argo CD installations either from the Web Interface or using the Command Line.
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ################################################################################################################################################################
+# ################################################################################################################################################################
+# ################################################################################################################################################################
+# Argo CD CLI
+
+Step 1
+
+Apart from the UI, ArgoCD also has a CLI. We have installed already the cli for you and authenticated against the instance.
+
+Try the following commands
+
+argocd app list
+argocd app get demo
+argocd app history demo
+
+Let's delete the application and deploy it again but from the CLI this time.
+
+First delete the app
+
+argocd app delete demo
+
+Confirm the deletion by answering yes in the terminal. The application will disappear from the Argo CD dashboard after some minutes.
+
+Now deploy it again.
+
+argocd app create demo2 \
+--project default \
+--repo https://github.com/codefresh-contrib/gitops-certification-examples \
+--path "./simple-app" \
+--dest-namespace default \
+--dest-server https://kubernetes.default.svc
+
+The application will appear in the ArgoCD dashboard.
+
+Now sync it with
+
+argocd app sync demo2
+
+Finish
+
+If you've viewed the dashboard, click Check to finish this track.
+
+
+
+~~~~bash
+root@kubernetes-vm:~/workdir# argocd app list
+NAME  CLUSTER                         NAMESPACE  PROJECT  STATUS  HEALTH   SYNCPOLICY  CONDITIONS  REPO                                                                PATH          TARGET
+demo  https://kubernetes.default.svc  default    default  Synced  Healthy  <none>      <none>      https://github.com/codefresh-contrib/gitops-certification-examples  ./simple-app  HEAD
+root@kubernetes-vm:~/workdir# 
+root@kubernetes-vm:~/workdir# 
+root@kubernetes-vm:~/workdir# 
+root@kubernetes-vm:~/workdir# 
+root@kubernetes-vm:~/workdir# argocd app get demo
+Name:               demo
+Project:            default
+Server:             https://kubernetes.default.svc
+Namespace:          default
+URL:                https://localhost:30443/applications/demo
+Repo:               https://github.com/codefresh-contrib/gitops-certification-examples
+Target:             HEAD
+Path:               ./simple-app
+SyncWindow:         Sync Allowed
+Sync Policy:        <none>
+Sync Status:        Synced to HEAD (c89b02b)
+Health Status:      Healthy
+
+GROUP  KIND        NAMESPACE  NAME               STATUS  HEALTH   HOOK  MESSAGE
+       Service     default    simple-service     Synced  Healthy        service/simple-service created
+apps   Deployment  default    simple-deployment  Synced  Healthy        deployment.apps/simple-deployment created
+root@kubernetes-vm:~/workdir# 
+root@kubernetes-vm:~/workdir# 
+root@kubernetes-vm:~/workdir# argocd app history demo
+ID  DATE                           REVISION
+0   2022-10-10 00:01:40 +0000 UTC  HEAD (c89b02b)
+root@kubernetes-vm:~/workdir# argocd app delete demo
+Are you sure you want to delete 'demo' and all its resources? [y/n]
+y
+root@kubernetes-vm:~/workdir# 
+root@kubernetes-vm:~/workdir# 
+root@kubernetes-vm:~/workdir# argocd app create demo2 \
+> --project default \
+> --repo https://github.com/codefresh-contrib/gitops-certification-examples \
+> --path "./simple-app" \
+> --dest-namespace default \
+> --dest-server https://kubernetes.default.svc
+application 'demo2' created
+root@kubernetes-vm:~/workdir# 
+root@kubernetes-vm:~/workdir# 
+root@kubernetes-vm:~/workdir# argocd app sync demo2
+TIMESTAMP                  GROUP        KIND   NAMESPACE                  NAME    STATUS    HEALTH        HOOK  MESSAGE
+2022-10-10T00:06:43+00:00            Service     default        simple-service  OutOfSync  Missing              
+2022-10-10T00:06:43+00:00   apps  Deployment     default     simple-deployment  OutOfSync  Missing              
+2022-10-10T00:06:43+00:00            Service     default        simple-service    Synced  Healthy              
+2022-10-10T00:06:44+00:00   apps  Deployment     default     simple-deployment  OutOfSync  Missing              deployment.apps/simple-deployment created
+2022-10-10T00:06:44+00:00            Service     default        simple-service    Synced   Healthy              service/simple-service created
+2022-10-10T00:06:44+00:00   apps  Deployment     default     simple-deployment    Synced  Progressing              deployment.apps/simple-deployment created
+
+Name:               demo2
+Project:            default
+Server:             https://kubernetes.default.svc
+Namespace:          default
+URL:                https://localhost:30443/applications/demo2
+Repo:               https://github.com/codefresh-contrib/gitops-certification-examples
+Target:             
+Path:               ./simple-app
+SyncWindow:         Sync Allowed
+Sync Policy:        <none>
+Sync Status:        Synced to  (c89b02b)
+Health Status:      Progressing
+
+Operation:          Sync
+Sync Revision:      c89b02b34185626d631a1e91e888098e76c568ec
+Phase:              Succeeded
+Start:              2022-10-10 00:06:43 +0000 UTC
+Finished:           2022-10-10 00:06:44 +0000 UTC
+Duration:           1s
+Message:            successfully synced (all tasks run)
+
+GROUP  KIND        NAMESPACE  NAME               STATUS  HEALTH       HOOK  MESSAGE
+       Service     default    simple-service     Synced  Healthy            service/simple-service created
+apps   Deployment  default    simple-deployment  Synced  Progressing        deployment.apps/simple-deployment created
+root@kubernetes-vm:~/workdir# 
+root@kubernetes-vm:~/workdir# 
+root@kubernetes-vm:~/workdir# 
+~~~~
