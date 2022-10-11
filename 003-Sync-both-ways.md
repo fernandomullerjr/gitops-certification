@@ -198,9 +198,9 @@ Finish
 Click Check to finish this track.
 
 
+- Saída dos comandos:
 
-
-
+~~~~bash
 root@kubernetes-vm:~/workdir# argocd app sync demo
 TIMESTAMP                  GROUP        KIND   NAMESPACE                  NAME    STATUS    HEALTH        HOOK  MESSAGE
 2022-10-11T01:07:46+00:00            Service     default        simple-service    Synced   Healthy              
@@ -260,10 +260,12 @@ GROUP  KIND        NAMESPACE  NAME               STATUS  HEALTH   HOOK  MESSAGE
        Service     default    simple-service     Synced  Healthy        service/simple-service unchanged
 apps   Deployment  default    simple-deployment  Synced  Healthy        deployment.apps/simple-deployment configured
 root@kubernetes-vm:~/workdir# 
+~~~~
 
 
 
 
 
+- O Argo CD detecta novamente a mudança entre os dois estados. 
+Esse recurso é muito poderoso e você pode detectar facilmente o desvio de configuração entre seus ambientes.
 
- 
