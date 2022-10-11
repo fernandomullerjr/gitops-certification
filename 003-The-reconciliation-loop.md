@@ -56,3 +56,19 @@ And finally you can change the way Argo CD learns about Git changes, and instead
 The process is described in the official documentation page at https://argo-cd.readthedocs.io/en/stable/operator-manual/webhook/ and it is different according to your Git provider.
 
 Using Webhooks is very efficient, as now your Argo CD installation will never delay when you commit something to Git. If you only use the default way of polling, then you might have to wait up to 3 minutes (or whatever time you have set as sync period) for Argo CD to detect the changes. With Webhooks, as soon as there is any change in Git, Argo CD will run the sync process.
+
+
+
+
+
+
+
+
+
+# ################################################################################################################################################################
+# ################################################################################################################################################################
+# ################################################################################################################################################################
+# RESUMO
+
+- Período de sync padrão é de 3 minutos.
+- Para desativar o sync, é possível via manifesto, setando o "timeout.reconciliation" com o valor 0.

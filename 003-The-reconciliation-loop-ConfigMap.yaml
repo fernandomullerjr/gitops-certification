@@ -1,0 +1,11 @@
+# This example changes the sync period to 4 minutes. After you change the manifest, you need to redeploy the argocd-repo-server service.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-cm
+  namespace: argocd
+  labels:
+    app.kubernetes.io/name: argocd-cm
+    app.kubernetes.io/part-of: argocd
+data:
+  timeout.reconciliation: 240s
