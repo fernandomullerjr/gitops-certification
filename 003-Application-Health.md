@@ -16,6 +16,7 @@ git status
 # ################################################################################################################################################################
 # ################################################################################################################################################################
 # Application Health
+
 Apart from the synced/out-of-sync status, Argo CD also keeps track of the service health for each deployed application. The health status is shown in the UI and can also be retrieved by the CLI.
 
 The possible values are:
