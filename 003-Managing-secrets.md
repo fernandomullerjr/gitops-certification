@@ -1,4 +1,22 @@
-Managing Secrets
+
+# ################################################################################################################################################################
+# ################################################################################################################################################################
+# ################################################################################################################################################################
+# Git push
+git status
+eval $(ssh-agent -s)
+ssh-add /home/fernando/.ssh/chave-debian10-github
+git add .
+git commit -m "Aula 03 - Managing Secrets"
+git push
+git status
+
+
+# ################################################################################################################################################################
+# ################################################################################################################################################################
+# ################################################################################################################################################################
+# Managing Secrets
+
 One of the foundations of GitOps is the usage of Git as the source of truth for the whole system. While most people are familiar with the practice of storing the application source code in version control, GitOps dictates that you should also store all the other parts of your application, such as configuration, Kubernetes manifests, db scripts, cluster definitions, etc.
 
 But what about secrets? How can you use secrets with GitOps? This has been one of the most popular questions from teams that adopt GitOps.
