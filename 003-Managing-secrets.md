@@ -86,3 +86,7 @@ The full process is the following:
 By using the Sealed Secrets controller, we can finally store all our secrets in Git (in an encrypted form) right along the application configuration.
 
 In the example repository, you can look at the folder https://github.com/codefresh-contrib/gitops-secrets-sample-app/tree/main/safe-to-commit and it contains all manifests of the application, including secrets.
+
+
+
+<https://argo-cd.readthedocs.io/en/stable/operator-manual/secret-management/>

@@ -373,6 +373,6 @@ Once you are ready to finish the track, press Check.
 
 # RESUMO
 - O recurso de "self-heal" do ArgoCD garante que os comandos ad-hoc não tenham efeito, que seja seguido a risca o que está no Git. Impedindo alterações manuais nos recursos do Kubernetes.
-
+- O recurso de Prune, permite que o ArgoCD efetue remoção de recursos, conforme seja deletado algo do Git.
 
 
