@@ -190,3 +190,51 @@ You can also see this with
 kubectl get rs
 
 Once you are ready to proceed, press Check.
+
+
+
+
+
+
+root@kubernetes-vm:~/workdir# kubectl argo rollouts list rollouts
+NAME            STRATEGY   STATUS        STEP  SET-WEIGHT  READY  DESIRED  UP-TO-DATE  AVAILABLE
+simple-rollout  BlueGreen  Healthy       -     -           2/2    2        2           2        
+root@kubernetes-vm:~/workdir# kubectl argo rollouts status simple-rollout
+
+Healthy
+root@kubernetes-vm:~/workdir# kubectl argo rollouts get rollout simple-rollout
+Name:            simple-rollout
+Namespace:       default
+Status:          ✔ Healthy
+Strategy:        BlueGreen
+Images:          docker.io/kostiscodefresh/gitops-canary-app:v1.0 (stable, active)
+Replicas:
+  Desired:       2
+  Current:       2
+  Updated:       2
+  Ready:         2
+  Available:     2
+
+NAME                                       KIND        STATUS     AGE  INFO
+⟳ simple-rollout                           Rollout     ✔ Healthy  38s  
+└──# revision:1                                                        
+   └──⧉ simple-rollout-b68b5bffb           ReplicaSet  ✔ Healthy  38s  stable,active
+      ├──□ simple-rollout-b68b5bffb-wrcj6  Pod         ✔ Running  38s  ready:1/1
+      └──□ simple-rollout-b68b5bffb-z9pm7  Pod         ✔ Running  38s  ready:1/1
+root@kubernetes-vm:~/workdir# 
+root@kubernetes-vm:~/workdir# 
+root@kubernetes-vm:~/workdir# 
+root@kubernetes-vm:~/workdir# 
+
+
+
+root@kubernetes-vm:~/workdir# kubectl get rs
+NAME                       DESIRED   CURRENT   READY   AGE
+simple-rollout-b68b5bffb   2         2         2       60s
+root@kubernetes-vm:~/workdir# 
+
+
+
+
+
+- The Argo Rollouts controller will only activate if a change happens in a Rollout resource.
