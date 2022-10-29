@@ -17,6 +17,7 @@ git status
 # ################################################################################################################################################################
 # ################################################################################################################################################################
 # Automated Rollbacks with Metrics
+
 While you can use canaries with simple pauses between the different stages, Argo Rollouts offers the powerful capability to look at application metrics and decide automatically if the deployment should continue or not.
 
 The idea behind this approach is to completely automate canary deployments. Instead of having a human running manual smoke tests, or looking at graphs, you can set different thresholds that define if a deployment is “successful” or not.
@@ -30,6 +31,7 @@ To take advantage of metric evaluation, Argo Rollouts introduces the concept of 
 
 Here is an example:
 
+~~~~yaml
 apiVersion: argoproj.io/v1alpha1
 kind: AnalysisTemplate
 metadata:
@@ -48,6 +50,7 @@ spec:
       prometheus:
         address: http://prom-release-prometheus-server.prom.svc.cluster.local:80
         query: sum(response_status{app="{{args.service-name}}",role="canary",status=~"2.*"})/sum(response_status{app="{{args.service-name}}",role="canary"}
+~~~~
 
 This prometheus analysis says that :
 
