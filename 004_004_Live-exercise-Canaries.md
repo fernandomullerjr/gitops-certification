@@ -470,3 +470,8 @@ Once you are ready to finish the track, press Check.
 # PENDENTE
 - Rodar live denovo
 - Pegar comandos
+
+
+
+# DIA 29/10/2022
+
