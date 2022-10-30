@@ -23,6 +23,7 @@ You can create an Argo Rollout application in Argo CD via all the ways already d
 
 For example, you can create an Argo Rollout application declaratively with the following Argo CD application:
 
+~~~~yaml
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -36,6 +37,7 @@ spec:
     repoURL: 'https://github.com/kostis-codefresh/summer-of-k8s-app-manifests'
     path: ./
     targetRevision: HEAD
+~~~~
 
 We have already talked about how Argo CD supports health status for several custom Kubernetes resources, and Argo Rollouts is one of them. This means:
 
