@@ -1,4 +1,14 @@
-Course Summary
+
+git status
+eval $(ssh-agent -s)
+ssh-add /home/fernando/.ssh/chave-debian10-github
+git add .
+git commit -m "Aula 005 - QUIZ e final"
+git push
+git status
+
+
+
 In this course, you have seen:
 
     What GitOps is and what are the principles behind it
